@@ -38,7 +38,7 @@ stages:
         provider: azurerm
         command: init
         commandOptions: '-backend-config=backend.tfvars -var "access_key=$(TFStorageAccountsAccessKey)"'
-        # backendServiceArm: sc-arm-nhatthai
+        backendServiceArm: sc-arm-nhatthai
         # backendAzureRmResourceGroupName: 'containers'
         # backendAzureRmStorageAccountName: 'azterraformstateex'
         # backendAzureRmContainerName: 'terraform-container-test'
