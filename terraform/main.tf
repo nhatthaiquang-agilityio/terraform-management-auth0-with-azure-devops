@@ -13,6 +13,8 @@ terraform {
 
   backend "azurerm" {
     resource_group_name  = "containers"
+    storage_account_name = "azterraformstateex"
+    container_name       = "terraform-container-test"
     key                  = "auth0.tfstate"
     access_key = var.access_key
   }

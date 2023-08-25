@@ -38,11 +38,11 @@ stages:
         provider: azurerm
         command: init
         commandOptions: '-backend-config=backend.tfvars -var "access_key=$(TFStorageAccountsAccessKey)"'
-        backendServiceArm: sc-arm-nhatthai
-        backendAzureRmResourceGroupName: 'containers'
-        backendAzureRmStorageAccountName: 'azterraformstateex'
-        backendAzureRmContainerName: 'terraform-container-test'
-        backendAzureRmKey: 'test.auth0.tfstate'
+        # backendServiceArm: sc-arm-nhatthai
+        # backendAzureRmResourceGroupName: 'containers'
+        # backendAzureRmStorageAccountName: 'azterraformstateex'
+        # backendAzureRmContainerName: 'terraform-container-test'
+        # backendAzureRmKey: 'test.auth0.tfstate'
 
     - task: TerraformTaskV3@3
       displayName: 'validate'
