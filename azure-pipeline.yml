@@ -37,9 +37,9 @@ stages:
         workingDirectory: $(System.DefaultWorkingDirectory)/terraform
         provider: azurerm
         command: init
-        commandOptions: '-backend-config=backend.tfvars -var "access_key=$(TFStorageAccountsAccessKey)"'
+        commandOptions: '-backend-config=backend.tfvars -var "access_key=$(TFStorageAccountsAccessKey)" -var "subscription_id=$(SubscriptionId)"'
         backendServiceArm: sc-arm-nhatthai
-        # backendAzureRmResourceGroupName: 'containers'
+        backendAzureRmResourceGroupName: 'containers'
         backendAzureRmStorageAccountName: 'azterraformstateex'
         backendAzureRmContainerName: 'terraform-container-test'
         backendAzureRmKey: 'test.auth0.tfstate'
