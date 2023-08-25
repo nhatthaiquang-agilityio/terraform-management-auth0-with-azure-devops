@@ -57,7 +57,7 @@ stages:
       inputs:
         workingDirectory: $(terraformWorkingDirectory)
         provider: 'azurerm'
-        environmentServiceNameAzureRM: $(SubscriptionId)
+        environmentServiceNameAzureRM: sc-arm-nhatthai
         command: 'plan'
         commandOptions: '-var-file="Environments/test.tfvars" -lock=false -var "key_vault_id=$(tf-key-vault-id)" -var "auth0_client_id=$(tf-auth0-client-id)" -var "auth0_client_secret=$(tf-auth0-client-secret)"'
 
@@ -67,6 +67,6 @@ stages:
         workingDirectory: $(terraformWorkingDirectory)
         provider: 'azurerm'
         command: 'apply'
-        environmentServiceNameAzureRM: $(subscription)
+        environmentServiceNameAzureRM: sc-arm-nhatthai
         commandOptions: >-
           -var-file="terraform/Environments/test.tfvars" -lock=false -var "key_vault_id=$(tf-key-vault-id)" -var "auth0_client_id=$(tf-auth0-client-id)" -var "auth0_client_secret=$(tf-auth0-client-secret)" -auto-approve
