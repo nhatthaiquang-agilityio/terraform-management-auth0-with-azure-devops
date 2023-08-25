@@ -37,7 +37,6 @@ stages:
         workingDirectory: $(System.DefaultWorkingDirectory)/terraform
         provider: azurerm
         command: init
-        commandOptions: '-var "auth0_client_id=$(TFAuth0ClientId)" -var "auth0_client_secret=$(TFAuth0ClientSecret)"'
         backendServiceArm: sc-arm-nhatthai
         backendAzureRmResourceGroupName: 'containers'
         backendAzureRmStorageAccountName: 'azterraformstateex'
