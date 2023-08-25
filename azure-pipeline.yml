@@ -34,7 +34,7 @@ stages:
     - task: TerraformTaskV3@3
       displayName: 'Terraform Init'
       inputs:
-        workingDirectory: '$(System.DefaultWorkingDirectory)'
+        workingDirectory: $(System.DefaultWorkingDirectory)/terraform
         provider: azurerm
         command: init
         commandOptions: '-var "auth0_client_id=$(TFAuth0ClientId)" -var "auth0_client_secret=$(TFAuth0ClientSecret)"'
@@ -47,7 +47,7 @@ stages:
     - task: TerraformTaskV3@3
       displayName: 'validate'
       inputs:
-        workingDirectory: $(System.DefaultWorkingDirectory)
+        workingDirectory: $(System.DefaultWorkingDirectory)/terraform
         provider: 'azurerm'
         command: 'validate'
 
@@ -55,7 +55,7 @@ stages:
     - task: TerraformTaskV3@3
       displayName: 'Terraform Plan'
       inputs:
-        workingDirectory: $(System.DefaultWorkingDirectory)
+        workingDirectory: $(System.DefaultWorkingDirectory)/terraform
         provider: 'azurerm'
         environmentServiceNameAzureRM: sc-arm-nhatthai
         command: 'plan'
@@ -67,7 +67,7 @@ stages:
     - task: TerraformTaskV3@3
       displayName: 'Terraform Apply'
       inputs:
-        workingDirectory: $(System.DefaultWorkingDirectory)
+        workingDirectory: $(System.DefaultWorkingDirectory)/terraform
         provider: 'azurerm'
         command: 'apply'
         environmentServiceNameAzureRM: sc-arm-nhatthai
