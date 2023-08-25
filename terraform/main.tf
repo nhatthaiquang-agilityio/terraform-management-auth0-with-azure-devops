@@ -12,8 +12,9 @@ terraform {
   }
 
   backend "azurerm" {
-    resource_group_name  = "Containers"
+    resource_group_name  = "containers"
     key                  = "auth0.tfstate"
+    access_key = ""
   }
 }
 
