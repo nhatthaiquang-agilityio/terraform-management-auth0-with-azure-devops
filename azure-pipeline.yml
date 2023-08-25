@@ -38,6 +38,7 @@ stages:
         provider: azurerm
         command: init
         commandOptions: '-var "access_key=$(tf-auth0-state-azureblob-access-key)"'
+        backendServiceArm: $(SubscriptionId)
         backendAzureRmResourceGroupName: 'containers'
         backendAzureRmStorageAccountName: 'azterraformstateex'
         backendAzureRmContainerName: 'terraform-container-test'
@@ -50,11 +51,13 @@ stages:
         provider: 'azurerm'
         command: 'validate'
 
+
     - task: TerraformTaskV3@3
       displayName: 'Terraform Plan'
       inputs:
         workingDirectory: $(terraformWorkingDirectory)
         provider: 'azurerm'
+        environmentServiceNameAzureRM: $(SubscriptionId)
         command: 'plan'
         commandOptions: '-var-file="Environments/test.tfvars" -lock=false -var "key_vault_id=$(tf-key-vault-id)" -var "auth0_client_id=$(tf-auth0-client-id)" -var "auth0_client_secret=$(tf-auth0-client-secret)"'
 
@@ -64,5 +67,6 @@ stages:
         workingDirectory: $(terraformWorkingDirectory)
         provider: 'azurerm'
         command: 'apply'
+        environmentServiceNameAzureRM: $(subscription)
         commandOptions: >-
           -var-file="terraform/Environments/test.tfvars" -lock=false -var "key_vault_id=$(tf-key-vault-id)" -var "auth0_client_id=$(tf-auth0-client-id)" -var "auth0_client_secret=$(tf-auth0-client-secret)" -auto-approve
