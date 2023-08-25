@@ -34,10 +34,10 @@ stages:
     - task: TerraformTaskV3@3
       displayName: 'Terraform Init'
       inputs:
-        workingDirectory: $(terraformWorkingDirectory)
+        workingDirectory: '$(System.DefaultWorkingDirectory)'
         provider: azurerm
         command: init
-        commandOptions: '-var "access_key=$(tf-auth0-state-azureblob-access-key)"'
+        commandOptions: '-var "auth0_client_id=$(TFAuth0ClientId)" -var "auth0_client_secret=$(TFAuth0ClientSecret)"'
         backendServiceArm: sc-arm-nhatthai
         backendAzureRmResourceGroupName: 'containers'
         backendAzureRmStorageAccountName: 'azterraformstateex'
@@ -47,7 +47,7 @@ stages:
     - task: TerraformTaskV3@3
       displayName: 'validate'
       inputs:
-        workingDirectory: $(terraformWorkingDirectory)
+        workingDirectory: $(System.DefaultWorkingDirectory)
         provider: 'azurerm'
         command: 'validate'
 
@@ -55,18 +55,23 @@ stages:
     - task: TerraformTaskV3@3
       displayName: 'Terraform Plan'
       inputs:
-        workingDirectory: $(terraformWorkingDirectory)
+        workingDirectory: $(System.DefaultWorkingDirectory)
         provider: 'azurerm'
         environmentServiceNameAzureRM: sc-arm-nhatthai
         command: 'plan'
-        commandOptions: '-var-file="Environments/test.tfvars" -lock=false -var "key_vault_id=$(tf-key-vault-id)" -var "auth0_client_id=$(tf-auth0-client-id)" -var "auth0_client_secret=$(tf-auth0-client-secret)"'
+        commandOptions: >-
+          -var-file="Environments/test.tfvars" -lock=false \
+          -var "auth0_client_id=$(TFAuth0ClientId)" \
+          -var "auth0_client_secret=$(TFAuth0ClientSecret)"
 
     - task: TerraformTaskV3@3
       displayName: 'Terraform Apply'
       inputs:
-        workingDirectory: $(terraformWorkingDirectory)
+        workingDirectory: $(System.DefaultWorkingDirectory)
         provider: 'azurerm'
         command: 'apply'
         environmentServiceNameAzureRM: sc-arm-nhatthai
         commandOptions: >-
-          -var-file="terraform/Environments/test.tfvars" -lock=false -var "key_vault_id=$(tf-key-vault-id)" -var "auth0_client_id=$(tf-auth0-client-id)" -var "auth0_client_secret=$(tf-auth0-client-secret)" -auto-approve
+          -var-file="terraform/Environments/test.tfvars" -lock=false \
+          -var "auth0_client_id=$(TFAuth0ClientId)" \
+          -var "auth0_client_secret=$(TFAuth0ClientSecret)" -auto-approve
