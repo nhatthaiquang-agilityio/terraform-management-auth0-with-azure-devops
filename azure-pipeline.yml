@@ -30,7 +30,7 @@ stages:
     - task: AzureKeyVault@2
       displayName: 'Download Azure KV'
       inputs:
-        azureSubscription: 'sc-arm-nhatthai'
+        azureSubscription: ${{ variables.AzureKeyVaultServiceConnectionName }}
         KeyVaultName: 'az-kv-terraform-test'
         SecretsFilter: '*'
         RunAsPreJob: true
