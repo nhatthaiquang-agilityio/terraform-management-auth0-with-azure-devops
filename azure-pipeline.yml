@@ -1,10 +1,14 @@
 pr: none
+
 pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-  # Terraform settings
-  terraformWorkingDirectory: '/opt/hostedtoolcache/terraform/1.5.6/x64/terraform'
+  TerraformWorkingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
+  AzureKeyVaultServiceConnectionName: sc-arm-nhatthai
+  StorgeAccountsName: terraformstateexample
+  AzureResourceGroupName: containers
+  AzureContainerName: terraform-container-state
 
 stages:
 - stage: Deployment
@@ -34,20 +38,20 @@ stages:
     - task: TerraformTaskV3@3
       displayName: 'Terraform Init'
       inputs:
-        workingDirectory: $(System.DefaultWorkingDirectory)/terraform
+        workingDirectory: ${{ variables.TerraformWorkingDirectory }}
         provider: azurerm
         command: init
-        commandOptions: '-backend-config=backend.tfvars -var "access_key=$(TFStorageAccountsAccessKey)" -var "subscription_id=$(SubscriptionId)"'
-        backendServiceArm: sc-arm-nhatthai
-        backendAzureRmResourceGroupName: 'containers'
-        backendAzureRmStorageAccountName: 'azterraformstateex'
-        backendAzureRmContainerName: 'terraform-container-test'
+        commandOptions: '-var "access_key=$(AzStorageAccountsAccessKey)"'
+        backendServiceArm: ${{ variables.AzureKeyVaultServiceConnectionName }}
+        backendAzureRmResourceGroupName: ${{ variables.AzureResourceGroupName }}
+        backendAzureRmStorageAccountName: ${{ variables.StorgeAccountsName }}
+        backendAzureRmContainerName: ${{ variables.AzureContainerName }}
         backendAzureRmKey: 'test.auth0.tfstate'
 
     - task: TerraformTaskV3@3
       displayName: 'validate'
       inputs:
-        workingDirectory: $(System.DefaultWorkingDirectory)/terraform
+        workingDirectory: ${{ variables.TerraformWorkingDirectory }}
         provider: 'azurerm'
         command: 'validate'
 
@@ -55,9 +59,9 @@ stages:
     - task: TerraformTaskV3@3
       displayName: 'Terraform Plan'
       inputs:
-        workingDirectory: $(System.DefaultWorkingDirectory)/terraform
+        workingDirectory: ${{ variables.TerraformWorkingDirectory }}
         provider: 'azurerm'
-        environmentServiceNameAzureRM: sc-arm-nhatthai
+        environmentServiceNameAzureRM: ${{ variables.AzureKeyVaultServiceConnectionName }}
         command: 'plan'
         commandOptions: >-
           -var-file="Environments/test.tfvars" -lock=false \
@@ -67,10 +71,10 @@ stages:
     - task: TerraformTaskV3@3
       displayName: 'Terraform Apply'
       inputs:
-        workingDirectory: $(System.DefaultWorkingDirectory)/terraform
+        workingDirectory: ${{ variables.TerraformWorkingDirectory }}
         provider: 'azurerm'
         command: 'apply'
-        environmentServiceNameAzureRM: sc-arm-nhatthai
+        environmentServiceNameAzureRM: ${{ variables.AzureKeyVaultServiceConnectionName }}
         commandOptions: >-
           -var-file="terraform/Environments/test.tfvars" -lock=false \
           -var "auth0_client_id=$(TFAuth0ClientId)" \

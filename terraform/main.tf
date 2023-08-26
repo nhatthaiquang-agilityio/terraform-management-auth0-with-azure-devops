@@ -2,7 +2,7 @@ terraform {
   required_providers {
     azurerm = {
       source = "hashicorp/azurerm",
-      version = "3.71"
+      version = "3.67"
     }
 
     auth0 = {
@@ -12,11 +12,9 @@ terraform {
   }
 
   backend "azurerm" {
-    # resource_group_name  = "containers"
-    storage_account_name = "azterraformstateex"
-    container_name       = "terraform-container-test"
-    key                  = "auth0.tfstate"
-    access_key = var.access_key
+    storage_account_name = ""
+    container_name       = ""
+    key                  = ""
   }
 }
 
@@ -27,18 +25,18 @@ provider "auth0" {
 }
 
 provider "azurerm" {
-  version = "3.71"
+  version = "3.67"
   features {}
 }
 
 resource "auth0_client" "spa_terraform" {
   name            = "WebAppSPA - ${var.environment}"
-  description     = "My Web App Created Through Terraform SPA1"
+  description     = "My Web App SPA is created through Terraform "
   app_type        = "spa"
-  callbacks       = ["http://localhost:3000/callback", "http://localhost:4000/callback"]
-  allowed_origins = ["http://localhost:3000"]
-  allowed_logout_urls  = ["http://localhost:3000"]
-  web_origins    = ["http://localhost:3000"]
+  callbacks       = var.callbacks
+  allowed_origins = var.allowed_origins
+  allowed_logout_urls  = var.allowed_logout_urls
+  web_origins    = var.web_origins
   oidc_conformant = true
   grant_types = ["authorization_code", "refresh_token"]
 
