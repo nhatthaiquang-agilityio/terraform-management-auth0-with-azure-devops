@@ -64,9 +64,7 @@ stages:
         environmentServiceNameAzureRM: ${{ variables.AzureKeyVaultServiceConnectionName }}
         command: 'plan'
         commandOptions: >-
-          -var-file="Environments/test.tfvars" -lock=false \
-          -var "auth0_client_id=$(TFAuth0ClientId)" \
-          -var "auth0_client_secret=$(TFAuth0ClientSecret)"
+          -var-file="Environments/test.tfvars" -lock=false -var "auth0_client_id=$(TFAuth0ClientId)" -var "auth0_client_secret=$(TFAuth0ClientSecret)"
 
     - task: TerraformTaskV3@3
       displayName: 'Terraform Apply'
@@ -76,6 +74,4 @@ stages:
         command: 'apply'
         environmentServiceNameAzureRM: ${{ variables.AzureKeyVaultServiceConnectionName }}
         commandOptions: >-
-          -var-file="terraform/Environments/test.tfvars" -lock=false \
-          -var "auth0_client_id=$(TFAuth0ClientId)" \
-          -var "auth0_client_secret=$(TFAuth0ClientSecret)" -auto-approve
+          -var-file="terraform/Environments/test.tfvars" -lock=false -var "auth0_client_id=$(TFAuth0ClientId)" -var "auth0_client_secret=$(TFAuth0ClientSecret)" -auto-approve
