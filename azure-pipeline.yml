@@ -31,7 +31,7 @@ stages:
       displayName: 'Download Azure KV'
       inputs:
         azureSubscription: ${{ variables.AzureKeyVaultServiceConnectionName }}
-        KeyVaultName: 'az-kv-terraform-test'
+        KeyVaultName: 'AzKvTerraformVariables'
         SecretsFilter: '*'
         RunAsPreJob: true
 
