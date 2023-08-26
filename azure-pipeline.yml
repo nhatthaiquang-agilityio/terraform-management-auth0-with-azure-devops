@@ -16,11 +16,11 @@ stages:
   - job: deploy_on_test
     continueOnError: false
     steps:
-    - task: CopyFiles@2
-      inputs:
-        SourceFolder: 'terraform'
-        Contents: '**'
-        TargetFolder: '$(Build.ArtifactStagingDirectory)'
+    # - task: CopyFiles@2
+    #   inputs:
+    #     SourceFolder: 'terraform'
+    #     Contents: '**'
+    #     TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
     - task: TerraformInstaller@0
       displayName: "install"
@@ -74,4 +74,4 @@ stages:
         command: 'apply'
         environmentServiceNameAzureRM: ${{ variables.AzureKeyVaultServiceConnectionName }}
         commandOptions: >-
-          -var-file="terraform/Environments/test.tfvars" -lock=false -var "auth0_client_id=$(TFAuth0ClientId)" -var "auth0_client_secret=$(TFAuth0ClientSecret)" -auto-approve
+          -var-file="Environments/test.tfvars" -lock=false -var "auth0_client_id=$(TFAuth0ClientId)" -var "auth0_client_secret=$(TFAuth0ClientSecret)" -auto-approve
