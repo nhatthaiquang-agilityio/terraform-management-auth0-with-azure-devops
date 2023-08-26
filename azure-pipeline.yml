@@ -5,7 +5,7 @@ pool:
 
 variables:
   TerraformWorkingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
-  AzureKeyVaultServiceConnectionName: sc-arm-nhatthai
+  AzureKeyVaultServiceConnectionName: AzureResourceConnection
   StorgeAccountsName: terraformstateexample
   AzureResourceGroupName: containers
   AzureContainerName: terraform-container-state
