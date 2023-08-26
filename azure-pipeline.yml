@@ -16,12 +16,6 @@ stages:
   - job: deploy_on_test
     continueOnError: false
     steps:
-    # - task: CopyFiles@2
-    #   inputs:
-    #     SourceFolder: 'terraform'
-    #     Contents: '**'
-    #     TargetFolder: '$(Build.ArtifactStagingDirectory)'
-
     - task: TerraformInstaller@0
       displayName: "install"
       inputs:
