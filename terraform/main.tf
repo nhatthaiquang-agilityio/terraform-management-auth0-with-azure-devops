@@ -2,7 +2,7 @@ terraform {
   required_providers {
     azurerm = {
       source = "hashicorp/azurerm",
-      version = "3.67"
+      version = "3.69"
     }
 
     auth0 = {
@@ -12,7 +12,6 @@ terraform {
   }
 
   backend "azurerm" {
-    access_key = var.access_key
   }
 }
 
@@ -23,7 +22,7 @@ provider "auth0" {
 }
 
 provider "azurerm" {
-  version = "3.67"
+  version = "3.69"
   features {}
 }
 
