@@ -20,5 +20,5 @@ variable "environment" {
 
 variable "access_key" {
   description = "access key to access the Azure Storage Account"
-  type        = ""
+  type        = string
 }
