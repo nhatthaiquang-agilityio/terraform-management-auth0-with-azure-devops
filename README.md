@@ -1,7 +1,12 @@
 # terraform-management-auth0-with-azure-devops
+    ```
     Run terraform to create an Application in Auth0 with Azure Pipeline
+    + Create Terraform-CI-CD template repository
+    + Apply the create-app-auth0.yml template from Terraform-CI-CD repository
+    + Set Secret Values into Azure Key Vault
+    ```
 
-Prequitises
+### Prerequisites
 + Setup Azure DevOps
 
 + Setup the Storage Account in Azure & get the access key
@@ -10,7 +15,7 @@ Prequitises
 + Set up Service Connection in Azure 
 ![Service Connection](./images/service-connection-azure.png)
 
-Result:
+### Result
 
 ![Pipeline Overview](./images/pipeline-overview.png)
 

@@ -1,4 +1,4 @@
-environment = "test"
+environment = "Test"
 application = "Application-Test"
 auth0_client_id = "Will need to Hydrate from AKV"
 auth0_client_secret = "Will need to Hydrate from AKV"
