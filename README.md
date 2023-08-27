@@ -19,6 +19,8 @@
 
 ![Pipeline Overview](./images/pipeline-overview.png)
 
+![Pipeline Detail with two environments](./images/Pipeline-Details.png)
+
 ![Pipeline Detail](./images/pipeline-detail.png)
 
 ![Azure Storage](./images/view-tfstate.png)
