@@ -5,10 +5,11 @@ pool:
 
 resources:
   repositories:
-  - repository: TerraformCICD # The name used to reference this repository in the checkout step
+  - repository: TerraformCI-CD # The name used to reference this repository in the checkout step
     type: github
     name: nhatthaiquang-agilityio/Terraform-CI-CD
     endpoint: nhatthaiquang-agilityio
+    ref: refs/heads/main
 
 variables:
   TerraformWorkingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
@@ -20,7 +21,7 @@ variables:
 stages:
 - stage: Deployment in TEST
   jobs:
-    - template: jobs/create-app-auth0@TerraformCICD
+    - template: jobs/create-app-auth0.yml@TerraformCICD
       parameters:
         TerraformWorkingDirectory: ${{ variables.TerraformWorkingDirectory }}
         AzureKeyVaultServiceConnectionName: ${{ variables.AzureKeyVaultServiceConnectionName }}
@@ -32,7 +33,7 @@ stages:
 
 - stage: Deployment in STAGE
   jobs:
-    - template: jobs/create-app-auth0@TerraformCICD
+    - template: jobs/create-app-auth0.yml@TerraformCICD
       parameters:
         TerraformWorkingDirectory: ${{ variables.TerraformWorkingDirectory }}
         AzureKeyVaultServiceConnectionName: ${{ variables.AzureKeyVaultServiceConnectionName }}
