@@ -5,7 +5,7 @@ pool:
 
 resources:
   repositories:
-  - repository: TerraformCI-CD # The name used to reference this repository in the checkout step
+  - repository: TerraformCICD # The name used to reference this repository in the checkout step
     type: github
     name: nhatthaiquang-agilityio/Terraform-CI-CD
     endpoint: nhatthaiquang-agilityio
