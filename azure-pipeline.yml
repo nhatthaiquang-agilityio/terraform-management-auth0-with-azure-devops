@@ -30,6 +30,7 @@ stages:
         AzureContainerName: ${{ variables.AzureContainerName }}
         VarFilePath: 'Environments/test.tfvars'
         AzureRmKeyTFState: 'test.auth0.tfstate'
+        EnvironmentName: Test
 
 - stage: Deployment in STAGE
   jobs:
@@ -42,7 +43,8 @@ stages:
         AzureContainerName: ${{ variables.AzureContainerName }}
         VarFilePath: 'Environments/stage.tfvars'
         AzureRmKeyTFState: 'stage.auth0.tfstate'
-
+        EnvironmentName: Stage
+        
   # - job: deploy_on_test
   #   continueOnError: false
   #   steps:
