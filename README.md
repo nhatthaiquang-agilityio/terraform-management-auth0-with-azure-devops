@@ -4,6 +4,7 @@
     + Create Terraform-CI-CD template repository (https://github.com/nhatthaiquang-agilityio/Terraform-CI-CD)
     + Apply the create-app-auth0.yml template from Terraform-CI-CD repository
     + Set Secret Values into Azure Key Vault such as StorageAccountAccessKey, TFAuth0ClientId and TFAuth0ClientSecret
+    + Save Terraform State Files in Azure Storage
     ```
 
 ### Prerequisites
