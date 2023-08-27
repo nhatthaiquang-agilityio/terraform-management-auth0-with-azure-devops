@@ -20,7 +20,7 @@ variables:
 stages:
 - stage: Deployment in TEST
   jobs:
-    - templates: jobs/create-app-auth0@TerraformCICD
+    - template: jobs/create-app-auth0@TerraformCICD
       parameters:
         TerraformWorkingDirectory: ${{ variables.TerraformWorkingDirectory }}
         AzureKeyVaultServiceConnectionName: ${{ variables.AzureKeyVaultServiceConnectionName }}
@@ -32,7 +32,7 @@ stages:
 
 - stage: Deployment in STAGE
   jobs:
-    - templates: jobs/create-app-auth0@TerraformCICD
+    - template: jobs/create-app-auth0@TerraformCICD
       parameters:
         TerraformWorkingDirectory: ${{ variables.TerraformWorkingDirectory }}
         AzureKeyVaultServiceConnectionName: ${{ variables.AzureKeyVaultServiceConnectionName }}
