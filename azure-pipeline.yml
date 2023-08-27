@@ -24,28 +24,30 @@ stages:
   jobs:
     - template: jobs/create-app-auth0.yml@TerraformCICD
       parameters:
-        TerraformWorkingDirectory: ${{ variables.TerraformWorkingDirectory }}
+        EnvironmentName: Test
         AzureKeyVaultServiceConnectionName: ${{ variables.AzureKeyVaultServiceConnectionName }}
         AzureResourceGroupName: ${{ variables.AzureResourceGroupName }}
-        StorgeAccountsName: ${{ variables.StorgeAccountsName }}
         AzureContainerName: ${{ variables.AzureContainerName }}
+        AzureRmKeyTFState: test.auth0.tfstate
+        KeyVaultName: AzKvTerraformVariables
+        StorgeAccountsName: ${{ variables.StorgeAccountsName }}
+        TerraformWorkingDirectory: ${{ variables.TerraformWorkingDirectory }}
         VarFilePath: 'Environments/test.tfvars'
-        AzureRmKeyTFState: 'test.auth0.tfstate'
-        EnvironmentName: Test
 
 - stage: DeployInStage
   displayName: Deployment in Stage
   jobs:
     - template: jobs/create-app-auth0.yml@TerraformCICD
       parameters:
-        TerraformWorkingDirectory: ${{ variables.TerraformWorkingDirectory }}
+        EnvironmentName: Stage
         AzureKeyVaultServiceConnectionName: ${{ variables.AzureKeyVaultServiceConnectionName }}
         AzureResourceGroupName: ${{ variables.AzureResourceGroupName }}
-        StorgeAccountsName: ${{ variables.StorgeAccountsName }}
+        AzureRmKeyTFState: stage.auth0.tfstate
         AzureContainerName: ${{ variables.AzureContainerName }}
+        KeyVaultName: AzKvTerraformVariables
+        StorgeAccountsName: ${{ variables.StorgeAccountsName }}
+        TerraformWorkingDirectory: ${{ variables.TerraformWorkingDirectory }}
         VarFilePath: 'Environments/stage.tfvars'
-        AzureRmKeyTFState: 'stage.auth0.tfstate'
-        EnvironmentName: Stage
 
   # - job: deploy_on_test
   #   continueOnError: false
