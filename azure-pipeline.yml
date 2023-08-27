@@ -8,6 +8,7 @@ resources:
   - repository: TerraformCICD # The name used to reference this repository in the checkout step
     type: github
     name: nhatthaiquang-agilityio/Terraform-CI-CD
+    endpoint: nhatthaiquang-agilityio
 
 variables:
   TerraformWorkingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
